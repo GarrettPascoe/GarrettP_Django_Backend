@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="home">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="resume">Resume</a>
+        <a class="nav-item nav-link" href="portfolio">Portfolio</a>
+        <a class="nav-item nav-link" href="mlshowcase">ML Showcase</a>
+        <a class="nav-item nav-link" href="database">Database</a>
+      </div>
+    </div>
+  </nav>
+{% endblock %}
+
+{% block content %}
+
+<html>
+    <body>
+        {% if name %}
+        <h1>Welcome to {{ name }} Pascoe's Homepage</h1>
+        {% else %}
+        <h1>Welcome to Garrett Pascoe's Homepage</h1>
+        {% endif %}
+        <br/><br/>
+        <h4>
+            I am a recent graduate with a bachelor's degree in computer science.
+            I have a strong interest in problem solving, particularly with algorithms
+            and machine learning. I am currently researching neural networking and
+            image processing.
+        </h4>
+        <br/><br/>
+        <h4>
+            On this site, built using the Django framework, I showcase my portfolio
+            of past coding projects, current machine learning projects, and use of databases.
+        </h4>
+    </body>
+</html>
+
+{% endblock %}
