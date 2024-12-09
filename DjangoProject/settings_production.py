@@ -59,13 +59,11 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://localhost:5173'
+    'http://https://garrettpascoe.com/*'
 ]
 
 CORS_ORIGIN_WHITELIST = [
-     'http://localhost:3000',  # The default port for create-react-app
-     'http://localhost:5173'
+    'http://https://garrettpascoe.com/*'
 ]
 
 ROOT_URLCONF = 'DjangoProject.urls'
