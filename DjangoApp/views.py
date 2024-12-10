@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from .models import *
 from .forms import *
 from .serializers import *
-from .classification_model import *
+#from .classification_model import *
 
 # Gets a request -> Gives a response
 # AKA a request handler or action
@@ -91,45 +91,6 @@ class CompanyViewset(viewsets.ViewSet):
         company.delete()
         return Response(status=204)
 
-class PredictionView(APIView):
-    permission_classes = [permissions.AllowAny]
-    def post(self, request, format=None):
-        if 'image' in request.FILES:
-            image_file = request.FILES['image']
-            print(request.FILES['image'])
-
-            # Create an instance of YourImageModel and save the image
-            uploadImage = ImageToClassify(image=image_file)
-            
-            formatImage = Image.open(uploadImage.image)
-            
-            # Transform layer - set size and convert images to tensors
-            data_transforms = v2.Compose([
-            v2.Resize((128, 128)),
-            ToTensor(),
-            ])
-            
-            formatImage = data_transforms(formatImage)
-            formatImage = formatImage.unsqueeze(0)
-            
-            model = load_model()
-            with torch.no_grad():
-                output = model(formatImage)
-                
-            print("file was uploaded")
-            print(output)
-            
-            max_value = torch.max(output)
-            tagResponse = ''
-            if max_value == output[0][0]:
-                tagResponse = 'The animal in the picture is a cat!'
-            if max_value == output[0][1]:
-                tagResponse = 'The animal in the picture is a dog!'
-            if max_value == output[0][2]:
-                tagResponse = 'The animal in the picture is a squirrel!'
-            return Response({'prediction': tagResponse})
-        else:
-            print("file failed to upload")
-            return Response("failed")
+#PredictionView goes here
         
 

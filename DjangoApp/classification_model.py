@@ -7,6 +7,15 @@ from torchvision.transforms import ToTensor
 from torchvision.transforms import v2
 from PIL import Image
 
+#test code
+from rest_framework.views import APIView
+from rest_framework import viewsets, permissions
+from rest_framework.response import Response
+from .models import *
+from .forms import *
+from .serializers import *
+#test code end
+
 
 class Net(nn.Module):
     def __init__(self):
@@ -63,3 +72,47 @@ def load_model():
     model.load_state_dict(torch.load('D:/Projects/Open Projects/Full GP Website/DjangoProject/DjangoApp/classification_model3.pth', weights_only=True))
     model.eval()  # Set the model to evaluation mode
     return model
+
+
+#test code start
+class PredictionView(APIView):
+    permission_classes = [permissions.AllowAny]
+    def post(self, request, format=None):
+        if 'image' in request.FILES:
+            image_file = request.FILES['image']
+            print(request.FILES['image'])
+
+            # Create an instance of YourImageModel and save the image
+            uploadImage = ImageToClassify(image=image_file)
+            
+            formatImage = Image.open(uploadImage.image)
+            
+            # Transform layer - set size and convert images to tensors
+            data_transforms = v2.Compose([
+            v2.Resize((128, 128)),
+            ToTensor(),
+            ])
+            
+            formatImage = data_transforms(formatImage)
+            formatImage = formatImage.unsqueeze(0)
+            
+            model = load_model()
+            with torch.no_grad():
+                output = model(formatImage)
+                
+            print("file was uploaded")
+            print(output)
+            
+            max_value = torch.max(output)
+            tagResponse = ''
+            if max_value == output[0][0]:
+                tagResponse = 'The animal in the picture is a cat!'
+            if max_value == output[0][1]:
+                tagResponse = 'The animal in the picture is a dog!'
+            if max_value == output[0][2]:
+                tagResponse = 'The animal in the picture is a squirrel!'
+            return Response({'prediction': tagResponse})
+        else:
+            print("file failed to upload")
+            return Response("failed")
+#test code end
