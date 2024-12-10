@@ -15,6 +15,6 @@ urlpatterns = [
     path("portfolio", views.portfolio, name="portfolio"),
     path("mlshowcase", views.mlshowcase, name="mlshowcase"),
     path("database", views.database, name="database"),
-    path('predict', PredictionView.as_view(), name='predict'),
+    #path('predict', PredictionView.as_view(), name='predict'),
     re_path('^', include(router.urls))
 ]
