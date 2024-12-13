@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'DjangoProject.wsgi.application'
 STORAGES = {
     "default": {"django.core.files.storage.FileSystemStorage",},
     
-    #"staticfiles": {'django.contrib.staticfiles.storage.StaticFilesStorage'},
+    "staticfiles": {'django.contrib.staticfiles.storage.StaticFilesStorage'},
 }
 
 
@@ -112,7 +112,9 @@ DATABASES = {
     }
 }
 
-#STATIC_ROOT = BASE_DIR/'staticfiles'
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
