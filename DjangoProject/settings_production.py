@@ -58,11 +58,11 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://https://garrettpascoe.com'
+    'https://garrettpascoe.com'
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://https://garrettpascoe.com'
+    'https://garrettpascoe.com'
 ]
 
 ROOT_URLCONF = 'DjangoProject.urls'
