@@ -85,17 +85,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'DjangoProject.wsgi.application'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-#Test readding storage
-STORAGES = {
-    "default": {"django.core.files.storage.FileSystemStorage",},
-}
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -112,7 +101,12 @@ DATABASES = {
     }
 }
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.0/howto/static-files/
+
 STATIC_URL = '/static/'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
