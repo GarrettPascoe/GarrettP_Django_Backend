@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
-from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -89,11 +88,12 @@ WSGI_APPLICATION = 'DjangoProject.wsgi.application'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STORAGES = {
-    "default": {"django.core.files.storage.FileSystemStorage",},
+#Test removing storage
+#STORAGES = {
+#    "default": {"django.core.files.storage.FileSystemStorage",},
     
-    "staticfiles": {"whitenoise.storage.CompressedManifestStaticFilesStorage"},
-}
+#    "staticfiles": {"whitenoise.storage.CompressedManifestStaticFilesStorage"},
+#}
 
 
 # Database
@@ -112,7 +112,7 @@ DATABASES = {
     }
 }
 
-STATIC_ROOT = BASE_DIR/'staticfiles'
+#STATIC_ROOT = BASE_DIR/'staticfiles'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
