@@ -88,12 +88,12 @@ WSGI_APPLICATION = 'DjangoProject.wsgi.application'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-#Test removing storage
-#STORAGES = {
-#    "default": {"django.core.files.storage.FileSystemStorage",},
+#Test readding storage
+STORAGES = {
+    "default": {"django.core.files.storage.FileSystemStorage",},
     
-#    "staticfiles": {"whitenoise.storage.CompressedManifestStaticFilesStorage"},
-#}
+    "staticfiles": {'django.contrib.staticfiles.storage.StaticFilesStorage'},
+}
 
 
 # Database
@@ -112,7 +112,7 @@ DATABASES = {
     }
 }
 
-#STATIC_ROOT = BASE_DIR/'staticfiles'
+STATIC_ROOT = BASE_DIR/'staticfiles'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
