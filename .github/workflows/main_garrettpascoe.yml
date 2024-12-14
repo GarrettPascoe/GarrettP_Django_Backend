@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'garrettpascoe'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1AE63DFE460643AB8625BFB900DD596D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6283E9DCF5944D40BB02DBAEEB0E6F9D }}
