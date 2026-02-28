@@ -1,3 +1,7 @@
+import requests
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets, permissions
@@ -93,4 +97,65 @@ class CompanyViewset(viewsets.ViewSet):
 
 #PredictionView goes here
         
+        
+        
+        
+# Section for FastAPI agent integration
+        
+AGENT_URL = "https://CarChooserGarrettP/run-agent"
+CREATE_SESSION_URL = "https://CarChooserGarrettP/create-session"
+
+@csrf_exempt
+def carchooser(request):
+
+    if request.method != "POST":
+        return JsonResponse({"error": "POST required"}, status=405)
+
+    body = json.loads(request.body)
+    user_input = body.get("input")
+
+    # Ensure session_id exists
+    session_id = request.session.get("agent_session_id")
+
+    if not session_id:
+        response = requests.post(CREATE_SESSION_URL)
+        session_id = response.json()["session_id"]
+        request.session["agent_session_id"] = session_id
+
+    # Get message history
+    messages = request.session.get("chat_history", [])
+
+    # Append user message
+    messages.append({
+        "type": "human",
+        "content": user_input
+    })
+
+    # Call FastAPI agent
+    response = requests.post(
+        AGENT_URL,
+        json={
+            "session_id": session_id,
+            "messages": messages
+        },
+        timeout=30
+    )
+
+    agent_reply = response.json()
+
+    # Append AI response
+    messages.append({
+        "type": "ai",
+        "content": agent_reply["message"]
+    })
+
+    # Save updated history
+    request.session["chat_history"] = messages
+
+    return JsonResponse({
+        "reply": agent_reply,
+        "messages": messages
+    })
+    
+# End of FastAPI agent integration section
 

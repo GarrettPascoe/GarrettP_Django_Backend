@@ -17,6 +17,7 @@ urlpatterns = [
     path("portfolio", views.portfolio, name="portfolio"),
     path("mlshowcase", views.mlshowcase, name="mlshowcase"),
     path("database", views.database, name="database"),
+    path("carchooser", views.carchooser, name="carchooser"),
     #path('predict', PredictionView.as_view(), name='predict'),
     re_path('^', include(router.urls))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
