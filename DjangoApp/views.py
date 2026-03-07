@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
@@ -58,52 +59,13 @@ def mlshowcase(request):
 def database(request):
     return render(request, 'Database.html', {})
 
-class CompanyViewset(viewsets.ViewSet):
-    permission_classes = [permissions.AllowAny]
-    queryset = CompanyContact.objects.all()
-    serializer_class = CompanyContactSerializer
-    
-    def list(self, request):
-        queryset = self.queryset
-        serializer = self.serializer_class(queryset, many=True)
-        return Response(serializer.data)
-    
-    def create(self, request):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response(serializer.errors, status=400)
 
-    def retrieve(self, request, pk=None):
-        company = self.queryset.get(pk=pk)
-        serializer = self.serializer_class(company)
-        return Response(serializer.data)
-
-    def update(self, request, pk=None):
-        company = self.queryset.get(pk=pk)
-        serializer = self.serializer_class(company, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response(serializer.errors, status=400)
-
-    def destroy(self, request, pk=None):
-        company = self.queryset.get(pk=pk)
-        company.delete()
-        return Response(status=204)
-
-#PredictionView goes here
-        
-        
-        
-        
 # Section for FastAPI agent integration
         
-AGENT_URL = "https://CarChooserGarrettP/run-agent"
-CREATE_SESSION_URL = "https://CarChooserGarrettP/create-session"
+#AGENT_URL = "https://CarChooserGarrettP/run-agent"
+#CREATE_SESSION_URL = "https://CarChooserGarrettP/create-session"
+AGENT_URL = os.getenv("AGENT_URL")
+CREATE_SESSION_URL = os.getenv("CREATE_SESSION_URL")
 
 @csrf_exempt
 def carchooser(request):
@@ -158,4 +120,44 @@ def carchooser(request):
     })
     
 # End of FastAPI agent integration section
+
+class CompanyViewset(viewsets.ViewSet):
+    permission_classes = [permissions.AllowAny]
+    queryset = CompanyContact.objects.all()
+    serializer_class = CompanyContactSerializer
+    
+    def list(self, request):
+        queryset = self.queryset
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+    
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
+
+    def retrieve(self, request, pk=None):
+        company = self.queryset.get(pk=pk)
+        serializer = self.serializer_class(company)
+        return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        company = self.queryset.get(pk=pk)
+        serializer = self.serializer_class(company, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
+
+    def destroy(self, request, pk=None):
+        company = self.queryset.get(pk=pk)
+        company.delete()
+        return Response(status=204)
+
+#PredictionView goes here
+
 
