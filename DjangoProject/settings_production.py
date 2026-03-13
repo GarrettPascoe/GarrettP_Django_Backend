@@ -58,9 +58,9 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://garrettpascoe.com'
-    'https://www.garrettpascoe.com'
-    'https://carchooseragent.onrender.com'
+    'https://garrettpascoe.com',
+    'https://www.garrettpascoe.com',
+    'https://carchooseragent.onrender.com',
     'https://www.carchooseragent.onrender.com'
 ]
 
