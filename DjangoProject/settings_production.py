@@ -59,12 +59,9 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'https://garrettpascoe.com'
+    'https://www.garrettpascoe.com'
     'https://carchooseragent.onrender.com'
-]
-
-CORS_ORIGIN_WHITELIST = [
-    'https://garrettpascoe.com'
-    'https://carchooseragent.onrender.com'
+    'https://www.carchooseragent.onrender.com'
 ]
 
 ROOT_URLCONF = 'DjangoProject.urls'
