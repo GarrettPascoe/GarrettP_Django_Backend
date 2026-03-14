@@ -94,20 +94,15 @@ def carchooser(request):
     })
 
     # Call FastAPI agent
-    #response = requests.post(
-    #    AGENT_URL,
-    #    json={
-    #        "session_id": session_id,
-    #        "messages": messages
-    #    },
-    #    timeout=30
-    #)
+    response = requests.post(
+        AGENT_URL,
+        json={
+            "session_id": session_id,
+            "messages": messages
+        },
+        timeout=300
+    )
     
-    response = requests.post(AGENT_URL, json=data)
-
-    print("STATUS:", response.status_code)
-    print("TEXT:", response.text)
-
     agent_reply = response.json()
 
     # Append AI response
